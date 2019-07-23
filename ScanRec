@@ -1,0 +1,975 @@
+from tkinter import *
+from tkinter import tix
+from tkinter.constants import *
+
+#Test du menu déroulant
+
+def Affiche(evt):
+    print(vardiamun)  ## On affiche a l'ecran la valeur selectionnee
+
+
+
+
+
+
+#def champs():
+
+
+
+
+def saisie():
+    listesaisie=[demandeNom.get(), demandePrenom.get(), demandeAgeJour.get(), demandeAgeMois.get(), demandeAgeAnnee.get(), demandePoids.get()]
+    return listesaisie #recupére la valeur saisie
+
+#Faire une fonction if pour éviter de créer des colonnes vides ?
+
+def bttest ():
+    #print("La commande fonctionne")
+    print(saisie())
+
+def fenetrenewrecept():
+    # Pour récupérer les variables des checbox
+    def f1():
+        return varasme.get()
+
+    def f2():
+        return variso.get()
+
+    def f3():
+        return vardin.get()
+
+    def f4():
+        return varautre.get()
+
+    def f5():
+        print(f1(), f2(), f3(), f4())
+
+    fen = Toplevel()
+    fen.title("Récéption")
+    titre = Label(fen, text="Nouvelle réception")
+    titre.grid(row=1, column=3, columnspan=8)
+
+    com = Label(fen, text="N° de commande : ")
+    fournisseur = Label(fen, text="Fournisseur : ")  #Mettre un menu déroulant
+    designation = Label(fen, text="Designation : ")
+    norme = Label(fen, text="Norme : ")
+    normeASME = Label(fen, text="ASME ")
+    normeISO = Label(fen, text="ISO")
+    normeDIN = Label(fen, text="DIN")
+    normeAutre = Label(fen, text="Autre")
+
+    diametre = Label(fen, text="Diamètre :")
+    diametreun = Label(fen, text="ø1")
+    diametredeux = Label(fen, text="ø2")
+    diametretrois = Label(fen, text="ø3")
+    rugosite = Label(fen, text="Rugosité : ")
+    heatnumber = Label(fen, text="Numéro de coulée : ")
+
+
+
+
+    numCom = Entry(fen, width=40)
+    demandeFournisseur = Entry(fen, width=40)
+    demandeDesignation = Entry(fen, width=40)
+
+
+
+
+
+    varasme = IntVar()
+    variso = IntVar()
+    vardin = IntVar()
+    varautre = IntVar()
+
+    checkASME = Checkbutton(fen, variable=varasme, text="ASME", command=f1)
+    checkISO = Checkbutton(fen, variable=variso, text="ISO", command=f2)
+    checkDIN = Checkbutton(fen, variable=vardin, text="DIN", command=f3)
+    checkAutre = Checkbutton(fen, variable=varautre, text="Autre", command=f4)
+
+
+
+
+    demandediametreun = Entry(fen, width=2)
+    demandediametredeux = Entry(fen, width=2)
+    demandediametretrois = Entry(fen, width=4)
+    demanderugosite = Entry(fen, width=40)
+    demandeheatnumber = Entry(fen, width=40)
+
+
+
+
+    #Menu déroulant
+
+
+
+    #if demandeNorme=ASME BPE          mettre pour diam1 2 et 3  : X1=AsmeUn X2=AsmeDeux etc
+
+   #valdun='12.7'
+   #valddeux='19.05'
+   #valdtrois='25.4'
+   #valdquatre='38.1'
+   #valdcinq='50.8'
+   #valdsix='63.5'
+   #valdsept='76.2'
+   #valdhuit='101.6'
+   #valdneuf=NONE
+   #valddix="tkt"
+   #valdonze = '88.9'
+   #valddouze = '114.3'
+
+
+
+    normeSel = tix.StringVar()
+
+    fen.tk.eval('package require Tix')
+    combonorme = tix.ComboBox(fen, variable=normeSel)
+    #combonorme.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    combonorme.insert(0, 'ASME BPE')
+    combonorme.insert(1, 'ISO')
+    combonorme.insert(2, 'DIN')
+    combonorme.insert(3, 'SMS')
+    combonorme.insert(4, 'Autre...')
+    #combonorme.select_set(0)
+
+    choixNorme = normeSel.get()
+
+
+
+
+
+    def variablenorme():
+        print(normeSel.get())
+        choixNorme = normeSel.get()
+
+    if choixNorme == 'ASME BPE':
+        valdun='12.7'
+        valddeux='19.05'
+        valdtrois='25.4'
+        valdquatre='38.1'
+        valdcinq='50.8'
+        valdsix='63.5'
+        valdsept='76.2'
+        valdhuit='101.6'
+        valdneuf=NONE
+
+    elif choixNorme == 'ISO':
+
+            valdun = '10.2'
+            valddeux = '13.5'
+            valdtrois = '17.2'
+            valdquatre = '21.3'
+            valdcinq = '26.9'
+            valdsix = '33.7'
+            valdsept = '42.4'
+            valdhuit = '48.3'
+            valdneuf = '60.3'
+            valddix = '76.1'
+            valdonze = '88.9'
+            valddouze = '114.3'
+
+    else:
+            print("Norme rien a voir")
+
+
+
+
+    fen.tk.eval('package require Tix')
+    vardiamun = tix.StringVar()
+    combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+    combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    #combodiamun.insert(0, valdun)
+    #combodiamun.insert(1, valddeux)
+    #combodiamun.insert(2, valdtrois)
+    #combodiamun.insert(3, valdquatre)
+    #combodiamun.insert(4, valdcinq)
+    #combodiamun.insert(5, valdsix)
+    #combodiamun.insert(6, valdsept)
+    #combodiamun.insert(7, valdhuit)
+    #combodiamun.insert(8, valdneuf)
+    #combodiamun.insert(9, valddix)
+    #combodiamun.insert(10, valdonze)
+    #combodiamun.insert(11, valddouze)
+
+    fen.tk.eval('package require Tix')
+    vardiamdeux = tix.StringVar()
+    combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+    combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    #combodiamdeux.insert(0, valdun)
+    #combodiamdeux.insert(1, valddeux)
+    #combodiamdeux.insert(2, valdtrois)
+    #combodiamdeux.insert(3, valdquatre)
+    #combodiamdeux.insert(4, valdcinq)
+    #combodiamdeux.insert(5, valdsix)
+    #combodiamdeux.insert(6, valdsept)
+    #combodiamdeux.insert(7, valdhuit)
+    #combodiamdeux.insert(8, valdneuf)
+    #combodiamdeux.insert(9, valddix)
+    #combodiamdeux.insert(10, valdonze)
+    #combodiamdeux.insert(11, valddouze)
+
+    fen.tk.eval('package require Tix')
+    vardiamtrois = tix.StringVar()
+    combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+    combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    #combodiamtrois.insert(0, valdun)
+    #combodiamtrois.insert(1, valddeux)
+    #combodiamtrois.insert(2, valdtrois)
+    #combodiamtrois.insert(3, valdquatre)
+    #combodiamtrois.insert(4, valdcinq)
+    #combodiamtrois.insert(5, valdsix)
+    #combodiamtrois.insert(6, valdsept)
+    #combodiamtrois.insert(7, valdhuit)
+    #combodiamtrois.insert(8, valdneuf)
+    #combodiamtrois.insert(9, valddix)
+    #combodiamtrois.insert(10, valdonze)
+    #combodiamtrois.insert(11, valddouze)
+
+
+
+    ###TEST BRUT, c'est ignoble... mais ça marche
+
+    def changementCombo():
+
+        print(normeSel.get())
+        choixNorme = normeSel.get()
+
+        if choixNorme == 'ASME BPE':
+            valdun = '12.7'
+            valddeux = '19.05'
+            valdtrois = '25.4'
+            valdquatre = '38.1'
+            valdcinq = '50.8'
+            valdsix = '63.5'
+            valdsept = '76.2'
+            valdhuit = '101.6'
+
+            fen.tk.eval('package require Tix')
+            vardiamun = tix.StringVar()
+            combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+            combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamun.insert(0, valdun)
+            combodiamun.insert(1, valddeux)
+            combodiamun.insert(2, valdtrois)
+            combodiamun.insert(3, valdquatre)
+            combodiamun.insert(4, valdcinq)
+            combodiamun.insert(5, valdsix)
+            combodiamun.insert(6, valdsept)
+            combodiamun.insert(7, valdhuit)
+
+
+            fen.tk.eval('package require Tix')
+            vardiamdeux = tix.StringVar()
+            combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+            combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamdeux.insert(0, valdun)
+            combodiamdeux.insert(1, valddeux)
+            combodiamdeux.insert(2, valdtrois)
+            combodiamdeux.insert(3, valdquatre)
+            combodiamdeux.insert(4, valdcinq)
+            combodiamdeux.insert(5, valdsix)
+            combodiamdeux.insert(6, valdsept)
+            combodiamdeux.insert(7, valdhuit)
+
+            fen.tk.eval('package require Tix')
+            vardiamtrois = tix.StringVar()
+            combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+            combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamtrois.insert(0, valdun)
+            combodiamtrois.insert(1, valddeux)
+            combodiamtrois.insert(2, valdtrois)
+            combodiamtrois.insert(3, valdquatre)
+            combodiamtrois.insert(4, valdcinq)
+            combodiamtrois.insert(5, valdsix)
+            combodiamtrois.insert(6, valdsept)
+            combodiamtrois.insert(7, valdhuit)
+
+
+            diametre.grid(row=7, column=1, sticky=W)
+            diametreun.grid(row=7, column=2)
+            combodiamun.grid(row=7, column=3)
+            # demandediametreun.grid(row=6, column=3)
+            diametredeux.grid(row=7, column=4)
+            combodiamdeux.grid(row=7, column=5)
+            # demandediametredeux.grid(row=6, column=5)
+            diametretrois.grid(row=7, column=6)
+            combodiamtrois.grid(row=7, column=7)
+            # demandediametretrois.grid(row=6, column=7)
+
+            retourDiamUn = vardiamun.get()
+            retourDiamDeux = vardiamdeux.get()
+            retourDiamTrois = vardiamtrois.get()
+
+            print(retourDiamUn)
+            print(retourDiamDeux)
+            print(retourDiamTrois)
+
+        elif choixNorme == 'ISO':
+
+            valdun = '10.2'
+            valddeux = '13.5'
+            valdtrois = '17.2'
+            valdquatre = '21.3'
+            valdcinq = '26.9'
+            valdsix = '33.7'
+            valdsept = '42.4'
+            valdhuit = '48.3'
+            valdneuf = '60.3'
+            valddix = '76.1'
+            valdonze = '88.9'
+            valddouze = '114.3'
+
+
+            fen.tk.eval('package require Tix')
+            vardiamun = tix.StringVar()
+            combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+            combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamun.insert(0, valdun)
+            combodiamun.insert(1, valddeux)
+            combodiamun.insert(2, valdtrois)
+            combodiamun.insert(3, valdquatre)
+            combodiamun.insert(4, valdcinq)
+            combodiamun.insert(5, valdsix)
+            combodiamun.insert(6, valdsept)
+            combodiamun.insert(7, valdhuit)
+            combodiamun.insert(8, valdneuf)
+            combodiamun.insert(9, valddix)
+            combodiamun.insert(10, valdonze)
+            combodiamun.insert(11, valddouze)
+
+            fen.tk.eval('package require Tix')
+            vardiamdeux = tix.StringVar()
+            combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+            combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamdeux.insert(0, valdun)
+            combodiamdeux.insert(1, valddeux)
+            combodiamdeux.insert(2, valdtrois)
+            combodiamdeux.insert(3, valdquatre)
+            combodiamdeux.insert(4, valdcinq)
+            combodiamdeux.insert(5, valdsix)
+            combodiamdeux.insert(6, valdsept)
+            combodiamdeux.insert(7, valdhuit)
+            combodiamdeux.insert(8, valdneuf)
+            combodiamdeux.insert(9, valddix)
+            combodiamdeux.insert(10, valdonze)
+            combodiamdeux.insert(11, valddouze)
+
+            fen.tk.eval('package require Tix')
+            vardiamtrois = tix.StringVar()
+            combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+            combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamtrois.insert(0, valdun)
+            combodiamtrois.insert(1, valddeux)
+            combodiamtrois.insert(2, valdtrois)
+            combodiamtrois.insert(3, valdquatre)
+            combodiamtrois.insert(4, valdcinq)
+            combodiamtrois.insert(5, valdsix)
+            combodiamtrois.insert(6, valdsept)
+            combodiamtrois.insert(7, valdhuit)
+            combodiamtrois.insert(8, valdneuf)
+            combodiamtrois.insert(9, valddix)
+            combodiamtrois.insert(10, valdonze)
+            combodiamtrois.insert(11, valddouze)
+
+            diametre.grid(row=7, column=1, sticky=W)
+            diametreun.grid(row=7, column=2)
+            combodiamun.grid(row=7, column=3)
+            # demandediametreun.grid(row=6, column=3)
+            diametredeux.grid(row=7, column=4)
+            combodiamdeux.grid(row=7, column=5)
+            # demandediametredeux.grid(row=6, column=5)
+            diametretrois.grid(row=7, column=6)
+            combodiamtrois.grid(row=7, column=7)
+            # demandediametretrois.grid(row=6, column=7)
+
+            retourDiamUn = vardiamun.get()
+            retourDiamDeux = vardiamdeux.get()
+            retourDiamTrois = vardiamtrois.get()
+
+            print(retourDiamUn)
+            print(retourDiamDeux)
+            print(retourDiamTrois)
+
+        elif choixNorme == 'DIN':
+
+            valdun = '28'
+            valddeux = '34'
+            valdtrois = '40'
+            valdquatre = '50'
+            valdcinq = '65'
+            valdsix = '80'
+            valdsept = '104'
+            valdhuit = '154'
+            valdneuf = '204'
+
+
+            fen.tk.eval('package require Tix')
+            vardiamun = tix.StringVar()
+            combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+            combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamun.insert(0, valdun)
+            combodiamun.insert(1, valddeux)
+            combodiamun.insert(2, valdtrois)
+            combodiamun.insert(3, valdquatre)
+            combodiamun.insert(4, valdcinq)
+            combodiamun.insert(5, valdsix)
+            combodiamun.insert(6, valdsept)
+            combodiamun.insert(7, valdhuit)
+            combodiamun.insert(8, valdneuf)
+
+
+            fen.tk.eval('package require Tix')
+            vardiamdeux = tix.StringVar()
+            combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+            combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamdeux.insert(0, valdun)
+            combodiamdeux.insert(1, valddeux)
+            combodiamdeux.insert(2, valdtrois)
+            combodiamdeux.insert(3, valdquatre)
+            combodiamdeux.insert(4, valdcinq)
+            combodiamdeux.insert(5, valdsix)
+            combodiamdeux.insert(6, valdsept)
+            combodiamdeux.insert(7, valdhuit)
+            combodiamdeux.insert(8, valdneuf)
+
+            fen.tk.eval('package require Tix')
+            vardiamtrois = tix.StringVar()
+            combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+            combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamtrois.insert(0, valdun)
+            combodiamtrois.insert(1, valddeux)
+            combodiamtrois.insert(2, valdtrois)
+            combodiamtrois.insert(3, valdquatre)
+            combodiamtrois.insert(4, valdcinq)
+            combodiamtrois.insert(5, valdsix)
+            combodiamtrois.insert(6, valdsept)
+            combodiamtrois.insert(7, valdhuit)
+            combodiamtrois.insert(8, valdneuf)
+
+
+            diametre.grid(row=7, column=1, sticky=W)
+            diametreun.grid(row=7, column=2)
+            combodiamun.grid(row=7, column=3)
+            # demandediametreun.grid(row=6, column=3)
+            diametredeux.grid(row=7, column=4)
+            combodiamdeux.grid(row=7, column=5)
+            # demandediametredeux.grid(row=6, column=5)
+            diametretrois.grid(row=7, column=6)
+            combodiamtrois.grid(row=7, column=7)
+            # demandediametretrois.grid(row=6, column=7)
+
+            retourDiamUn = vardiamun.get()
+            retourDiamDeux = vardiamdeux.get()
+            retourDiamTrois = vardiamtrois.get()
+
+            print(retourDiamUn)
+            print(retourDiamDeux)
+            print(retourDiamTrois)
+
+        elif choixNorme == 'SMS':
+
+            valdun = '25'
+            valddeux = '38'
+            valdtrois = '51'
+            valdquatre = '63'
+            valdcinq = '76'
+            valdsix = '104'
+
+
+            fen.tk.eval('package require Tix')
+            vardiamun = tix.StringVar()
+            combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+            combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamun.insert(0, valdun)
+            combodiamun.insert(1, valddeux)
+            combodiamun.insert(2, valdtrois)
+            combodiamun.insert(3, valdquatre)
+            combodiamun.insert(4, valdcinq)
+            combodiamun.insert(5, valdsix)
+
+            fen.tk.eval('package require Tix')
+            vardiamdeux = tix.StringVar()
+            combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+            combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamdeux.insert(0, valdun)
+            combodiamdeux.insert(1, valddeux)
+            combodiamdeux.insert(2, valdtrois)
+            combodiamdeux.insert(3, valdquatre)
+            combodiamdeux.insert(4, valdcinq)
+            combodiamdeux.insert(5, valdsix)
+
+
+            fen.tk.eval('package require Tix')
+            vardiamtrois = tix.StringVar()
+            combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+            combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+            combodiamtrois.insert(0, valdun)
+            combodiamtrois.insert(1, valddeux)
+            combodiamtrois.insert(2, valdtrois)
+            combodiamtrois.insert(3, valdquatre)
+            combodiamtrois.insert(4, valdcinq)
+            combodiamtrois.insert(5, valdsix)
+
+
+            diametre.grid(row=7, column=1, sticky=W)
+            diametreun.grid(row=7, column=2)
+            combodiamun.grid(row=7, column=3)
+            # demandediametreun.grid(row=6, column=3)
+            diametredeux.grid(row=7, column=4)
+            combodiamdeux.grid(row=7, column=5)
+            # demandediametredeux.grid(row=6, column=5)
+            diametretrois.grid(row=7, column=6)
+            combodiamtrois.grid(row=7, column=7)
+            # demandediametretrois.grid(row=6, column=7)
+
+            retourDiamUn = vardiamun.get()
+            retourDiamDeux = vardiamdeux.get()
+            retourDiamTrois = vardiamtrois.get()
+
+            print(retourDiamUn)
+            print(retourDiamDeux)
+            print(retourDiamTrois)
+
+
+        elif choixNorme == 'Autre...':
+            PreciserAutre = Label(fen, text="Préciser autre...")
+            champPreciserNorme = Entry(fen)
+            champPreciserNorme.grid(row=6, column=5)
+            PreciserAutre.grid(row=6, column=4)
+
+            chpDiamUn = Entry(fen)
+            chpDiamDeux = Entry(fen)
+            chpDiamTrois = Entry(fen)
+
+            chpDiamUn.grid(row=7, column=3)
+            chpDiamDeux.grid(row=7, column=5)
+            chpDiamTrois.grid(row=7, column=7)
+
+            retourDiamUn = chpDiamUn.get()
+            retourDiamDeux = chpDiamDeux.get()
+            retourDiamTrois = chpDiamTrois.get()
+
+            print(retourDiamUn)
+            print(retourDiamDeux)
+            print(retourDiamTrois)
+
+        else:
+            print("Norme rien a voir")
+
+        #fen.tk.eval('package require Tix')
+        #vardiamun = tix.StringVar()
+        #combodiamun = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamun, command=Affiche)
+        #combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+        #combodiamun.insert(0, valdun)
+        #combodiamun.insert(1, valddeux)
+        #combodiamun.insert(2, valdtrois)
+        #combodiamun.insert(3, valdquatre)
+        #combodiamun.insert(4, valdcinq)
+        #combodiamun.insert(5, valdsix)
+        #combodiamun.insert(6, valdsept)
+        #combodiamun.insert(7, valdhuit)
+        #combodiamun.insert(8, valdneuf)
+        #combodiamun.insert(9, valddix)
+        #combodiamun.insert(10, valdonze)
+        #combodiamun.insert(11, valddouze)
+#
+        #fen.tk.eval('package require Tix')
+        #vardiamdeux = tix.StringVar()
+        #combodiamdeux = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamdeux, command=Affiche)
+        #combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+        #combodiamdeux.insert(0, valdun)
+        #combodiamdeux.insert(1, valddeux)
+        #combodiamdeux.insert(2, valdtrois)
+        #combodiamdeux.insert(3, valdquatre)
+        #combodiamdeux.insert(4, valdcinq)
+        #combodiamdeux.insert(5, valdsix)
+        #combodiamdeux.insert(6, valdsept)
+        #combodiamdeux.insert(7, valdhuit)
+        #combodiamdeux.insert(8, valdneuf)
+        #combodiamdeux.insert(9, valddix)
+        #combodiamdeux.insert(10, valdonze)
+        #combodiamdeux.insert(11, valddouze)
+#
+        #fen.tk.eval('package require Tix')
+        #vardiamtrois = tix.StringVar()
+        #combodiamtrois = tix.ComboBox(fen, editable=1, dropdown=1, variable=vardiamtrois, command=Affiche)
+        #combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+        #combodiamtrois.insert(0, valdun)
+        #combodiamtrois.insert(1, valddeux)
+        #combodiamtrois.insert(2, valdtrois)
+        #combodiamtrois.insert(3, valdquatre)
+        #combodiamtrois.insert(4, valdcinq)
+        #combodiamtrois.insert(5, valdsix)
+        #combodiamtrois.insert(6, valdsept)
+        #combodiamtrois.insert(7, valdhuit)
+        #combodiamtrois.insert(8, valdneuf)
+        #combodiamtrois.insert(9, valddix)
+        #combodiamtrois.insert(10, valdonze)
+        #combodiamtrois.insert(11, valddouze)
+
+        diametre.grid(row=7, column=1, sticky=W)
+        diametreun.grid(row=7, column=2)
+        combodiamun.grid(row=7, column=3)
+        # demandediametreun.grid(row=6, column=3)
+        diametredeux.grid(row=7, column=4)
+        combodiamdeux.grid(row=7, column=5)
+        # demandediametredeux.grid(row=6, column=5)
+        diametretrois.grid(row=7, column=6)
+        combodiamtrois.grid(row=7, column=7)
+        # demandediametretrois.grid(row=6, column=7)
+
+
+
+
+
+
+
+
+    bouttonValider = Button(fen, text="Valider", command=f5)
+    bouttonQuit = Button(fen, text="Quit", command=quit)
+    bouttonNorme = Button(fen, text="Confirmer", command=changementCombo)#variablenorme)
+
+    com.grid(row=2, column=1, sticky=W)
+    numCom.grid(row=2, column=3, columnspan=8)
+    fournisseur.grid(row=3, column=1, sticky=W)
+    demandeFournisseur.grid(row=3, column=3, columnspan=8)
+
+    norme.grid(row=6, column=1, sticky=W)
+
+
+
+    #checkASME.grid(row=6, column=2)
+    #checkISO.grid(row=6, column=4)
+    #checkDIN.grid(row=6, column=6)
+    #checkAutre.grid(row=6, column=8)
+
+    combonorme.grid(row=6, column=3)
+
+
+
+
+    designation.grid(row=4, column=1, sticky=W)
+    demandeDesignation.grid(row=4, column=3, columnspan=8)
+
+    diametre.grid(row=7, column=1, sticky=W)
+    diametreun.grid(row=7, column=2)
+    combodiamun.grid(row=7, column=3)
+    #demandediametreun.grid(row=6, column=3)
+    diametredeux.grid(row=7, column=4)
+    combodiamdeux.grid(row=7, column=5)
+    #demandediametredeux.grid(row=6, column=5)
+    diametretrois.grid(row=7, column=6)
+    combodiamtrois.grid(row=7, column=7)
+    #demandediametretrois.grid(row=6, column=7)
+
+    rugosite.grid(row=8, column=1, sticky=W)
+    demanderugosite.grid(row=8, column=3, columnspan=8)
+
+    heatnumber.grid(row=9, column=1, sticky=W)
+    demandeheatnumber.grid(row=9, column=3, columnspan=8)
+
+
+    bouttonValider.grid(row=10, column=3)
+    bouttonQuit.grid(row=10, column=1)
+
+    bouttonNorme.grid(row=6, column = 2)
+
+
+
+    fen.mainloop()
+
+
+
+
+
+
+
+
+
+
+def newaf():
+    fenetrenewaf = Toplevel(fenetre)
+    fenetrenewaf.geometry("650x800")
+    fenetrenewaf.title("ScanRec - Nouvelle affaire")
+    fenetrenewaf.minsize(650, 800)
+    fenetrenewaf.maxsize(650, 800)
+    # fenetre.iconbitmap("icon.ico")
+    fenetrenewaf.config(background="#5F5F5F")
+
+
+    # Définition des frames pour X critères (modifier le facteur divisant ci dessous) !!! PAR SOUCIS LISIBILTE LIMITER
+    # LE NB OU MODIFIER TAILLE FRAME AUQEL CAS IL FAUDRA MODIFIER LA VALEUR DANS NBFRAMENEWAF (OU REDUIRE LES PAD Y
+    # DES FRAMES INDIV) et mettre en comm les valeurs "posframeXXX" supprimées
+    #
+    # ON PEUT EGALEMENT LE FAIRE MANUELLEMENT EN METTANT COMME INTERVAL LA HAUTEUR INDIQUEE DANS LA HEIGHT DES FRAME
+
+    nbframenewaf = 800/7
+
+
+
+
+
+
+        # Précalcul des positions des frames
+
+    posframeun = 0
+
+    posframedeux = nbframenewaf
+
+    posframetrois = 2*nbframenewaf
+
+    posframequatre = 3*nbframenewaf
+
+    posframecinq = 4*nbframenewaf
+
+    posframesix = 5*nbframenewaf
+
+    posframesept = 6*nbframenewaf
+
+    #Def des frames
+
+    frametitlenewaf = Frame(fenetrenewaf, bg="#5F5F5F")
+    frametitlenewaf.place(x=0, y=posframeun, width=650, height=posframedeux)
+
+    framenumaff = Frame(fenetrenewaf, bg="#dfba11", borderwidth=25)
+    framenumaff.place(x=0, y=posframedeux, width=650, height=posframedeux)
+
+    framediam = Frame(fenetrenewaf, bg="#9E3E29")
+    framediam.place(x=0, y=posframetrois, width=650, height=posframedeux)
+
+    frameheatnb = Frame(fenetrenewaf, bg="#11DFC6")
+    frameheatnb.place(x=0, y=posframecinq, width=650, height=posframedeux)
+
+    framefournisseur = Frame(fenetrenewaf, bg="#af21af")
+    framefournisseur.place(x=0, y=posframequatre, width=650, height=posframedeux)
+
+    framenorme = Frame(fenetrenewaf, bg="#525197")
+    framenorme.place(x=0, y=posframesix, width=650, height=posframedeux)
+
+    framerugo = Frame(fenetrenewaf, bg="#5aa490")
+    framerugo.place(x=0, y=posframesept, width=650, height=posframedeux)
+
+
+    # Menus déroulant
+
+    fenetrenewaf.tk.eval('package require Tix')
+    varcombo = tix.StringVar()
+    combodiamun = tix.ComboBox(framediam, editable=1, dropdown=1, variable=varcombo, command=Affiche)
+    combodiamun.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    combodiamun.insert(0, '12.7')
+    combodiamun.insert(1, '19.05')
+    combodiamun.insert(2, '25.4')
+    combodiamun.insert(3, '38.1')
+    combodiamun.insert(4, '50.8')
+    combodiamun.insert(5, '63.5')
+    combodiamun.insert(6, '76.2')
+    combodiamun.insert(7, '101.6')
+
+    varcombo = tix.StringVar()
+    combodiamdeux = tix.ComboBox(framediam, editable=1, dropdown=1, variable=varcombo, command=Affiche)
+    combodiamdeux.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    combodiamdeux.insert(0, '12.7')
+    combodiamdeux.insert(1, '19.05')
+    combodiamdeux.insert(2, '25.4')
+    combodiamdeux.insert(3, '38.1')
+    combodiamdeux.insert(4, '50.8')
+    combodiamdeux.insert(5, '63.5')
+    combodiamdeux.insert(6, '76.2')
+    combodiamdeux.insert(7, '101.6')
+
+    varcombo = tix.StringVar()
+    combodiamtrois = tix.ComboBox(framediam, editable=1, dropdown=1, variable=varcombo, command=Affiche)
+    combodiamtrois.entry.config(state='readonly')  ## met la zone de texte en lecture seule
+    combodiamtrois.insert(0, '12.7')
+    combodiamtrois.insert(1, '19.05')
+    combodiamtrois.insert(2, '25.4')
+    combodiamtrois.insert(3, '38.1')
+    combodiamtrois.insert(4, '50.8')
+    combodiamtrois.insert(5, '63.5')
+    combodiamtrois.insert(6, '76.2')
+    combodiamtrois.insert(7, '101.6')
+
+
+
+
+    # Labels
+
+    labtitre = Label(frametitlenewaf, text="Saisissez les données du matériel à réceptionner", fg="#C0FAFF",
+                     font=("Courrier", 20), bg="#5F5F5F", borderwidth=25)
+
+    labnumaff = Label(framenumaff, text="Saisissez le numéro d'affaire", fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F")
+
+        #POUR LABELS DIAMETRE METTRE DES VOLETS DEROULANTS COTE A COTE ø1 ø2 ø3
+
+        ### ATTENTION BORDERWIDTH ICI ALORS QU4IL SERAIT PLUS JUDICEUX DANS LA FRAME
+
+    labdiam = Label(framediam, text="Selectionnez le(s) diamètre(s)", fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F", borderwidth=5)
+
+    labdiamun = Label(framediam, text="Diamètre 1", fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F", borderwidth=5)
+
+    labdiamdeux = Label(framediam, text="Diamètre 2",fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F", borderwidth=5)
+
+    labdiamtrois = Label(framediam, text="Diamètre 3",fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F", borderwidth=5)
+
+    labnumcom = Label(framefournisseur, text="Numéro de commande",fg="#C0FAFF", font=("Courrier", 10),
+                      bg="#5F5F5F", borderwidth=5)
+
+
+
+    # On pack tout ici avec les labels correspondants car l'ordre importe
+
+        # Titre
+
+    labtitre.pack(expand=TRUE)
+
+        # Numero aff
+
+    chpnumaff = StringVar()
+    chpnumaff.set("")
+    numaff = Entry(framenumaff, textvariable=chpnumaff, width=25)
+    labnumaff.pack()
+    numaff.pack(pady=3, fill=X)
+
+        # Diametres
+
+    labdiam.pack()
+
+    #labdiamun.pack(side = LEFT)
+    labdiamun.place(x=0, y=25)
+    #labdiamdeux.pack(side = LEFT)
+    labdiamdeux.place(x=215, y=25)
+    labdiamtrois.place(x=450, y=25)
+    #combodiamun.pack(side = BOTTOM)#, fill=X)
+    combodiamun.place(x=0, y=50)
+    #combodiamdeux.pack(side = BOTTOM)#, fill=X)
+    combodiamdeux.place(x=215, y=50)
+    combodiamtrois.place(x=450, y=50)
+
+        #numéro commande
+
+
+    chpnumcom = StringVar()
+    chpnumcom.set("")
+    numcom = Entry(framefournisseur, textvariable=chpnumcom, width=25)
+    labnumcom.pack()
+    numcom.pack(pady=3, fill=X)
+
+
+
+
+
+
+    ### Commentaire important : A l'avenir ajouter une fonction/boucle permetant de forcer un seul type de Numéro d'aff
+    ### Afin d'éviter toute complication par la suite quand au traitement des données (Avec message d'érreur et un numéro type)
+
+
+
+def menuppal():
+    print("Bjr")#il s'agit du test pour visualiser si la fonction s'est lancée
+
+    # Nouvelle frame
+
+    framenewaf = Frame(fenetre, bg="#C0FAFF")
+    framenewaf.place(x=0, y=0, width = 1920, height = 1080)
+
+    #Titre de la nvelle frame
+
+    labelmenuppal = Label(fenetre, text="Nouvelle Affaire", font=("Courrier", 40), bg="#5F5F5F", fg="#FFF5EE")
+    labelmenuppal.pack(side=TOP)
+
+    # Sous frame dans laquelle seront situé les différents champs
+
+    framenewafchps = Frame(framenewaf, bg="#5F5F5F")
+    framenewafchps.place (x=635, y=140, width=650, height = 800)
+
+    #Champs de la frame
+
+    labnumaff=Label(framenewafchps, text = "Saisissez le nouveau numéro d'affaire", fg ="#C0FAFF", font=("Courrier",10),
+                    bg="#5F5F5F")
+    labnumaff.pack()
+    chpnumaff=StringVar()
+    chpnumaff.set("")
+    numaff= Entry(framenewafchps, textvariable=chpnumaff, width=50)
+    numaff.pack(pady=30, fill=X)
+
+
+
+
+fenetre = Tk()
+
+
+def Nvellefenetre():
+    window = Toplevel(fenetre)
+    display = Label(window, text="Humm, see a new window !")
+    display.pack()
+
+
+# Définition d'une fonction a lancer pour tester le bon fonctionnnement des menus et bouttons
+
+def hello():
+    print("Le bouton renvoie bien la commande.")
+
+
+
+# Définition des frames
+
+frametitre = Frame(fenetre, bg='#FFF5EE')
+frametitre.place(x = 15, y = 10, width = 780, height = 75)
+
+frameppal = Frame(fenetre, bg="#C0FAFF")
+frameppal.place(x=635, y=140, width=650, height = 800)
+
+
+# Définition de la fenetre
+
+fenetre.geometry("1920x1080")
+fenetre.title("ScanRec")
+fenetre.minsize(720, 480)
+# fenetre.iconbitmap("icon.ico")
+fenetre.config(background="#5F5F5F")
+
+# Définition de la barre de menu
+
+menubar = Menu(fenetre)
+
+# Définition des sous menus
+
+menufichier = Menu(menubar, tearoff=0)
+menufichier.add_command(label="Nouvelle affaire", command=hello)
+menubar.add_cascade(label="Fichier", menu=menufichier)
+
+menuediter = Menu(menubar, tearoff=0)
+menuediter.add_command(label="Couper", command=hello)
+menuediter.add_command(label="Copier", command=hello)
+menuediter.add_command(label="Coller", command=hello)
+menubar.add_cascade(label="Éditer", menu=menuediter)
+
+menubar.add_cascade(label="Aide", command=hello)
+
+fenetre.config(menu=menubar)
+
+
+# Définition du texte d'accueil
+
+label = Label(frametitre, text="Ajouter logo ou titre logiciel", font=("Courrier", 40), bg="#FFF5EE", fg="#5F5F5F")
+#label.place(x = 60, y = 800, width=120, height=140)
+label.pack()
+
+# Définition des boutons d'accueil
+
+btslaf = Button(frameppal, text="Nouvelle réception",command=fenetrenewrecept,font=("Courrier", 15))
+btslaf.pack(pady=30, fill=X)
+
+
+btnewaf = Button(frameppal, text="Consulter base de données", command=hello, font=("Courrier", 15))
+btnewaf.pack(pady=30, fill=X)
+
+
+fenetre.mainloop()
+
+
+
